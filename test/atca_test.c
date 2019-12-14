@@ -33,15 +33,17 @@ extern tng_type_t g_tng_test_type;
 // gCfg must point to one of the cfg_ structures for any unit test to work.  this allows
 // the command console to switch device types at runtime.
 ATCAIfaceCfg g_iface_config = {
-    .iface_type        = ATCA_UNKNOWN_IFACE,
-    .devtype           = ATCA_DEV_UNKNOWN,
-    .atcai2c           = {
-        .slave_address = 0xC0,
-        .bus           = 2,
-        .baud          = 400000,
+    .iface_type            = ATCA_UNKNOWN_IFACE,
+    .devtype               = ATCA_DEV_UNKNOWN,
+    {
+        .atcai2c           = {
+            .slave_address = 0xC0,
+            .bus           = 2,
+            .baud          = 400000,
+        },
     },
-    .wake_delay        = 1500,
-    .rx_retries        = 20
+    .wake_delay            = 1500,
+    .rx_retries            = 20
 };
 
 ATCAIfaceCfg *gCfg = &g_iface_config;
@@ -271,15 +273,15 @@ void RunAllHelperTests(void)
     RunAllTests(helper_tests);
 }
 
-void RunTNG22Tests(void)
+void RunTNGTLSTests(void)
 {
-    g_tng_test_type = TNGTYPE_22;
+    g_tng_test_type = TNGTYPE_TLS;
     RunAllTests(tng_tests);
 }
 
-void RunTNGTNTests(void)
+void RunTNGLORATests(void)
 {
-    g_tng_test_type = TNGTYPE_TN;
+    g_tng_test_type = TNGTYPE_LORA;
     RunAllTests(tng_tests);
 }
 
